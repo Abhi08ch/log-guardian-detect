@@ -24,11 +24,13 @@ const ModelComparison: React.FC<ModelComparisonProps> = ({ modelResults }) => {
   const metrics = ['accuracy', 'precision', 'recall', 'f1', 'auc'];
   
   metrics.forEach(metric => {
-    const dataPoint = { subject: metric.charAt(0).toUpperCase() + metric.slice(1) };
+    const dataPoint: Record<string, string | number> = { subject: metric.charAt(0).toUpperCase() + metric.slice(1) };
     
     modelResults.forEach(model => {
       // Add each model's performance to this metric datapoint
-      dataPoint[model.name] = model[metric as keyof typeof model] * 100;
+      // Use type assertion to ensure TypeScript knows this is a number
+      const value = model[metric as keyof typeof model] as number;
+      dataPoint[model.name] = value * 100;
     });
     
     radarData.push(dataPoint);
