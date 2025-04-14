@@ -1,8 +1,6 @@
 
 # Database Anomaly Detection Dashboard
 
-![Demo Preview](./public/anomaly-detection.png)
-
 ## Project Overview
 
 This dashboard provides an interactive interface for database anomaly detection, allowing users to visualize model performance, compare different algorithms, analyze feature importance, and fine-tune hyperparameters to improve detection accuracy.
@@ -86,6 +84,4 @@ npm run dev
 - Deeper investigation tools for flagged transactions
 - User feedback loop to improve model accuracy
 
-## License
 
-[MIT](LICENSE)
