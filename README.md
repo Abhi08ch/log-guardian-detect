@@ -84,4 +84,6 @@ npm run dev
 - Deeper investigation tools for flagged transactions
 - User feedback loop to improve model accuracy
 
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
