@@ -17,14 +17,22 @@ interface ModelComparisonProps {
 
 const ModelComparison: React.FC<ModelComparisonProps> = ({ modelResults }) => {
   // Create data for the radar chart
-  const radarData = modelResults.map(model => ({
-    algorithm: model.name,
-    accuracy: model.accuracy * 100,
-    precision: model.precision * 100,
-    recall: model.recall * 100,
-    f1: model.f1 * 100,
-    auc: model.auc * 100,
-  }));
+  // Restructure the radar data to work with the RadarChart component
+  const radarData = [];
+  
+  // Create metrics as separate keys
+  const metrics = ['accuracy', 'precision', 'recall', 'f1', 'auc'];
+  
+  metrics.forEach(metric => {
+    const dataPoint = { subject: metric.charAt(0).toUpperCase() + metric.slice(1) };
+    
+    modelResults.forEach(model => {
+      // Add each model's performance to this metric datapoint
+      dataPoint[model.name] = model[metric as keyof typeof model] * 100;
+    });
+    
+    radarData.push(dataPoint);
+  });
 
   // Prepare data for the metrics comparison
   const createMetricData = (metric: string) => {
@@ -46,15 +54,15 @@ const ModelComparison: React.FC<ModelComparisonProps> = ({ modelResults }) => {
           <div className="h-[300px]">
             <h4 className="mb-2 text-sm font-medium">Algorithm Performance by Metric</h4>
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart outerRadius={90} width={730} height={250} data={radarData[0]}>
+              <RadarChart outerRadius={90} width={730} height={250} data={radarData}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subject" />
                 <PolarRadiusAxis angle={30} domain={[0, 100]} />
-                {modelResults.map((model, idx) => (
+                {modelResults.map((model) => (
                   <Radar 
                     key={model.name} 
                     name={model.name} 
-                    dataKey={model.name.toLowerCase().replace(' ', '_')} 
+                    dataKey={model.name} 
                     stroke={model.color} 
                     fill={model.color} 
                     fillOpacity={0.2} 
