@@ -1,5 +1,11 @@
 
 # Database Anomaly Detection Dashboard
+![image](https://github.com/user-attachments/assets/8130b676-00b4-4e08-92a8-ff18f08f8e4a)
+![image](https://github.com/user-attachments/assets/c700c8d1-cd4a-4079-90e2-608ff9857211)
+![image](https://github.com/user-attachments/assets/590d3cee-bd55-4461-a382-ad686885afed)
+![image](https://github.com/user-attachments/assets/6228cc5c-94c1-48cb-b385-34ebf11eb648)
+
+
 
 ## Project Overview
 
