@@ -25,7 +25,7 @@ const AnomalyAnalysis: React.FC<AnomalyAnalysisProps> = ({ anomalyData }) => {
     if (!apiKey) {
       toast({
         title: "API Key Required",
-        description: "Please enter your Perplexity API key to use the analysis feature.",
+        description: "Please enter your OpenAI API key to use the analysis feature.",
         variant: "destructive"
       });
       return;
@@ -33,14 +33,14 @@ const AnomalyAnalysis: React.FC<AnomalyAnalysisProps> = ({ anomalyData }) => {
 
     setIsAnalyzing(true);
     try {
-      const response = await fetch('https://api.perplexity.ai/chat/completions', {
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'llama-3.1-sonar-small-128k-online',
+          model: 'gpt-3.5-turbo',
           messages: [
             {
               role: 'system',
@@ -92,7 +92,7 @@ const AnomalyAnalysis: React.FC<AnomalyAnalysisProps> = ({ anomalyData }) => {
         <div className="space-y-2">
           <input
             type="password"
-            placeholder="Enter Perplexity API Key"
+            placeholder="Enter OpenAI API Key"
             className="w-full px-3 py-2 border rounded-md"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
